@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('exemplo', function () {
+    $nome = 'Clayton';
+    $sobrenome = "Figueiredo";
+//    return view('exemplo')->with('nome', $nome);
+//    return view('exemplo', compact('nome', 'sobrenome'));
+    return view('exemplo', ['nome' => $nome, 'sobrenome' => $sobrenome]);
+});
