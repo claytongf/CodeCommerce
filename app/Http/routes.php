@@ -14,10 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('exemplo', function () {
-    $nome = 'Clayton';
-    $sobrenome = "Figueiredo";
-//    return view('exemplo')->with('nome', $nome);
-//    return view('exemplo', compact('nome', 'sobrenome'));
-    return view('exemplo', ['nome' => $nome, 'sobrenome' => $sobrenome]);
+Route::get('admin/category', function () {
+    $categories = CodeCommerce\Category::all();
+    return view('admin/category', compact('categories'));
+});
+
+Route::get('admin/product', function(){
+    $products = CodeCommerce\Product::all();
+    return view('admin/product', compact('products'));
 });
