@@ -14,12 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('admin/category', function () {
-    $categories = CodeCommerce\Category::all();
-    return view('admin/category', compact('categories'));
-});
 
-Route::get('admin/product', function(){
-    $products = CodeCommerce\Product::all();
-    return view('admin/product', compact('products'));
-});
+Route::get('admin/category', 'AdminCategoriesController@index');
+
+Route::get('admin/products', 'AdminProductsController@index');
+
+//Route::get('admin/category', function () {
+//    $categories = CodeCommerce\Category::all();
+//    return view('admin/category', compact('categories'));
+//});
+//
+//Route::get('admin/product', function(){
+//    $products = CodeCommerce\Product::all();
+//    return view('admin/product', compact('products'));
+//});
