@@ -15,9 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin/category', 'AdminCategoriesController@index');
+//Route::get('admin/category', 'AdminCategoriesController@index');
+//
+//Route::get('admin/products', 'AdminProductsController@index');
 
-Route::get('admin/products', 'AdminProductsController@index');
+Route::group(['prefix' => 'admin'], function(){
+    Route::get('category', 'AdminCategoriesController@index');
+    Route::get('products', 'AdminProductsController@index');
+});
 
 //Route::get('admin/category', function () {
 //    $categories = CodeCommerce\Category::all();
