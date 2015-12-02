@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
+use CodeCommerce\Category;
 
 class AdminCategoriesController extends Controller
 {
@@ -16,7 +17,8 @@ class AdminCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('admin/category', compact('categories'));
     }
 
     /**
