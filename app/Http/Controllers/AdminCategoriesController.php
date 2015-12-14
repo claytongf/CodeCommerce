@@ -18,32 +18,32 @@ class AdminCategoriesController extends Controller
 
     public function index() {
         $categories = $this->categoryModel->all();
-        return view('admincategories.index', compact('categories'));
+        return view('admin/categories.index', compact('categories'));
     }
     
     public function create() {
-        return view('admincategories.create');
+        return view('admin/categories.create');
     }
     
     public function store(Requests\CategoryRequest $request) {
         $input = $request->all();
         $category = $this->categoryModel->fill($input);
         $category->save();
-        return redirect()->route('admincategories');
+        return redirect()->route('admin/categories');
     }
     
     public function edit($id) {
         $category = $this->categoryModel->find($id);
-        return view('admincategories.edit', compact('category'));
+        return view('admin/categories.edit', compact('category'));
     }
     
     public function update(Requests\CategoryRequest $request, $id) {
         $this->categoryModel->find($id)->update($request->all());
-        return redirect()->route('admincategories');
+        return redirect()->route('admin/categories');
     }
     
     public function destroy($id) {
         $this->categoryModel->find($id)->delete();
-        return redirect()->route('admincategories');
+        return redirect()->route('admin/categories');
     }
 }

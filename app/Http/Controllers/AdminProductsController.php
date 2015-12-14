@@ -23,7 +23,7 @@ class AdminProductsController extends Controller
     public function index()
     {
         $products = $this->productModel->all();
-        return view('adminproducts.index', compact('products'));
+        return view('admin/products.index', compact('products'));
     }
 
     /**
@@ -33,7 +33,7 @@ class AdminProductsController extends Controller
      */
     public function create()
     {
-        return view('adminproducts.create');
+        return view('admin/products.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class AdminProductsController extends Controller
         $input = $request->all();
         $product = $this->productModel->fill($input);
         $product->save();
-        return redirect()->route('adminproducts');
+        return redirect()->route('admin/products');
     }
 
     /**
@@ -59,7 +59,7 @@ class AdminProductsController extends Controller
     public function edit($id)
     {
         $product = $this->productModel->find($id);
-        return view('adminproducts.edit', compact('product'));
+        return view('admin/products.edit', compact('product'));
     }
 
     /**
@@ -72,7 +72,7 @@ class AdminProductsController extends Controller
     public function update(Requests\ProductRequest $request, $id)
     {
         $this->productModel->find($id)->update($request->all());
-        return redirect()->route('adminproducts');
+        return redirect()->route('admin/products');
     }
 
     /**
@@ -84,6 +84,6 @@ class AdminProductsController extends Controller
     public function destroy($id)
     {
         $this->productModel->find($id)->delete();
-        return redirect()->route('adminproducts');
+        return redirect()->route('admin/products');
     }
 }

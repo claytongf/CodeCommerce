@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 <div class="container">
-    <h1>Create Product</h1>
+    <h1>Editing Product: {{$product->name}}</h1>
     @if ($errors->any())
     <ul class="alert">
         @foreach($errors->all() as $error)
@@ -9,31 +9,40 @@
         @endforeach
     </ul>
     @endif
-    {!! Form::open(['route'=>'products.store']) !!}
+    {!! Form::open(['route'=>['admin/products.update', $product->id], 'method'=>'put']) !!}
     <div class="form-group">
         {!! Form::label('name', 'Name:') !!}
-        {!! Form::text('name', null, ['class'=>'form-control']) !!}
+        {!! Form::text('name', $product->name, ['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('description', 'Description:') !!}
-        {!! Form::textarea('description', null, ['class'=>'form-control']) !!}
+        {!! Form::textarea('description', $product->description, ['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('price', 'Price:') !!}
-        {!! Form::text('price', null, ['class'=>'form-control']) !!}
+        {!! Form::text('price', $product->price, ['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('featured', 'Featured:') !!}
         {!! Form::hidden('featured', 'no')!!}
+        @if ($product->featured === 'yes')
+        {!! Form::checkbox('featured', 'yes', true) !!}
+        @else
         {!! Form::checkbox('featured', 'yes', false) !!}
+        
+        @endif
     </div>
     <div class="form-group">
         {!! Form::label('recommend', 'Recommend:') !!}
         {!! Form::hidden('recommend', 'no')!!}
+        @if ($product->recommend === 'yes')
+        {!! Form::checkbox('recommend', 'yes', true) !!}
+        @else
         {!! Form::checkbox('recommend', 'yes', false) !!}
+        @endif
     </div>
     <div class="form-group">
-        {!! Form::submit('Add Product', ['class'=>'btn btn-primary form-control']) !!}
+        {!! Form::submit('Save Product', ['class'=>'btn btn-primary form-control']) !!}
     </div>
     {!! Form::close() !!}
 </div>

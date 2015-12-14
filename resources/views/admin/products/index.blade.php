@@ -4,7 +4,7 @@
     <h1>Products</h1>
     
     <br />
-    <a href="{{ route('products.create') }}" class="btn btn-default">New Product</a>
+    <a href="{{ route('admin/products.create') }}" class="btn btn-default">New Product</a>
     <br />
     <br />
     <table class="table">
@@ -27,8 +27,8 @@
             <td>{{ $product->featured }}</td>
             <td>{{ $product->recommend }}</td>
             <td>
-                <a href="{{ route('products.edit', ['id'=>$product->id])}}">Edit</a> | 
-                <a href="{{ route('products.destroy', ['id'=>$product->id])}}">Delete</a>
+                <a href="{{ route('admin/products.edit', ['id'=>$product->id])}}">Edit</a> | 
+                <a href="{{ route('admin/products.destroy', ['id'=>$product->id])}}">Delete</a>
             </td>
         </tr>
         @endforeach
