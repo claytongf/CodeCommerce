@@ -10,80 +10,40 @@ use CodeCommerce\Category;
 
 class AdminCategoriesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $categories = Category::all();
-        return view('admin/category', compact('categories'));
+    private $categoryModel;
+    
+    function __construct(Category $categoryModel) {
+        $this->categoryModel = $categoryModel;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function index() {
+        $categories = $this->categoryModel->all();
+        return view('admincategories.index', compact('categories'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    
+    public function create() {
+        return view('admincategories.create');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    
+    public function store(Requests\CategoryRequest $request) {
+        $input = $request->all();
+        $category = $this->categoryModel->fill($input);
+        $category->save();
+        return redirect()->route('admincategories');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    
+    public function edit($id) {
+        $category = $this->categoryModel->find($id);
+        return view('admincategories.edit', compact('category'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    
+    public function update(Requests\CategoryRequest $request, $id) {
+        $this->categoryModel->find($id)->update($request->all());
+        return redirect()->route('admincategories');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    
+    public function destroy($id) {
+        $this->categoryModel->find($id)->delete();
+        return redirect()->route('admincategories');
     }
 }
