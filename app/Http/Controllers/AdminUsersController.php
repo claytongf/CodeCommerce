@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 
 use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
-use CodeCommerce\Product;
+use CodeCommerce\User;
 
-class AdminProductsController extends Controller
+class AdminUsersController extends Controller
 {
-    private $productModel;
+    private $user;
     
-    function __construct(Product $productModel) {
-        $this->productModel = $productModel;
+    function __construct(User $user) {
+        $this->user = $user;
     }
     /**
      * Display a listing of the resource.
@@ -22,8 +22,8 @@ class AdminProductsController extends Controller
      */
     public function index()
     {
-        $products = $this->productModel->all();
-        return view('admin/products.index', compact('products'));
+        $users = $this->user->all();
+        return view('admin/users.index', compact('users'));
     }
 
     /**
@@ -33,7 +33,7 @@ class AdminProductsController extends Controller
      */
     public function create()
     {
-        return view('admin/products.create');
+        return view('admin/users.create');
     }
 
     /**
@@ -42,12 +42,12 @@ class AdminProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\ProductRequest $request)
+    public function store(Requests\UserRequest $request)
     {
         $input = $request->all();
-        $product = $this->productModel->fill($input);
-        $product->save();
-        return redirect()->route('admin/products');
+        $user = $this->user->fill($input);
+        $user->save();
+        return redirect()->route('admin/users');
     }
 
     /**
@@ -58,8 +58,8 @@ class AdminProductsController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->productModel->find($id);
-        return view('admin/products.edit', compact('product'));
+        $user = $this->user->find($id);
+        return view('admin/users.edit', compact('user'));
     }
 
     /**
@@ -71,8 +71,8 @@ class AdminProductsController extends Controller
      */
     public function update(Requests\ProductRequest $request, $id)
     {
-        $this->productModel->find($id)->update($request->all());
-        return redirect()->route('admin/products');
+        $this->user->find($id)->update($request->all());
+        return redirect()->route('admin/users');
     }
 
     /**
@@ -83,7 +83,7 @@ class AdminProductsController extends Controller
      */
     public function destroy($id)
     {
-        $this->productModel->find($id)->delete();
-        return redirect()->route('admin/products');
+        $this->user->find($id)->delete();
+        return redirect()->route('admin/users');
     }
 }

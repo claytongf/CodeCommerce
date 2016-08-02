@@ -1,7 +1,7 @@
-<h1>Products</h1>
+<h1>Users</h1>
 
 <ul>
-    @foreach($products as $product)
-    <li>{{$product->name}} - {{$product->description}} - {{$product->price}}</li>
+    @foreach($users as $user)
+    <li>{{$user->name}} - {{$user->email}} - {{$user->price}}</li>
     @endforeach
 </ul>

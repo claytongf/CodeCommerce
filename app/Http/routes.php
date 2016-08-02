@@ -29,6 +29,13 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('products/{id}/edit', ['as' => 'admin/products.edit', 'uses' => 'AdminProductsController@edit']);
     Route::put('products/{id}/update', ['as' => 'admin/products.update', 'uses' => 'AdminProductsController@update']);
     Route::get('products/{id}/destroy', ['as' => 'admin/products.destroy', 'uses' => 'AdminProductsController@destroy']);
+    
+    Route::get('users', ['as' => 'admin/users', 'uses' => 'AdminUsersController@index']);
+    Route::post('users', ['as' => 'admin/users.store', 'uses' => 'AdminUsersController@store']);
+    Route::get('users/create', ['as' => 'admin/users.create', 'uses' => 'AdminUsersController@create']);
+    Route::get('users/{id}/edit', ['as' => 'admin/users.edit', 'uses' => 'AdminUsersController@edit']);
+    Route::put('users/{id}/update', ['as' => 'admin/users.update', 'uses' => 'AdminUsersController@update']);
+    Route::get('users/{id}/destroy', ['as' => 'admin/users.destroy', 'uses' => 'AdminUsersController@destroy']);
 });
 //Route::get('admin/category', function () {
 //    $categories = CodeCommerce\Category::all();

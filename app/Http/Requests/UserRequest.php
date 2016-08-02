@@ -4,7 +4,7 @@ namespace CodeCommerce\Http\Requests;
 
 use CodeCommerce\Http\Requests\Request;
 
-class ProductRequest extends Request
+class UserRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
