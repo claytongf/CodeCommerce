@@ -14,7 +14,7 @@ class ProductTableSeeder extends \Illuminate\Database\Seeder {
     public function run() {
         DB::table('products')->truncate();
         
-        factory('CodeCommerce\Product', 15)->create();
+        factory('CodeCommerce\Product', 40)->create();
         
 //        $faker = Faker::create();
 //

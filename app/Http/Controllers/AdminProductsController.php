@@ -4,6 +4,7 @@ namespace CodeCommerce\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use CodeCommerce\Category;
 use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
 use CodeCommerce\Product;
@@ -22,7 +23,7 @@ class AdminProductsController extends Controller
      */
     public function index()
     {
-        $products = $this->productModel->all();
+        $products = $this->productModel->paginate(10);
         return view('admin/products.index', compact('products'));
     }
 
@@ -31,9 +32,10 @@ class AdminProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Category $category)
     {
-        return view('admin/products.create');
+        $categories = $category->lists('name', 'id');
+        return view('admin/products.create', compact('categories'));
     }
 
     /**
@@ -56,10 +58,11 @@ class AdminProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Category $category)
     {
+        $categories = $category->lists('name', 'id');
         $product = $this->productModel->find($id);
-        return view('admin/products.edit', compact('product'));
+        return view('admin/products.edit', compact('product', 'categories'));
     }
 
     /**
