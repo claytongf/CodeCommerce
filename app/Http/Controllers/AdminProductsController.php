@@ -109,7 +109,7 @@ class AdminProductsController extends Controller {
 
     public function destroyImage(ProductImage $productImage, $id) {
         $image = $productImage->find($id);
-        if (file_exists(public_path('uploads') . '/uploads/' . $image->id . '.' . $image->extension)):
+        if (file_exists(public_path('uploads'). '/' . $image->id . '.' . $image->extension)):
             Storage::disk('public_local')->delete($image->id . '.' . $image->extension);
         endif;
         $product = $image->product;
