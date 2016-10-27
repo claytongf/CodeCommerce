@@ -37,6 +37,10 @@
         {!! Form::checkbox('recommend', 'yes', false) !!}
     </div>
     <div class="form-group">
+        {!! Form::label('tags', 'Tags (separados por vírgula):') !!}
+        {!! Form::textarea('tags', null, ['class'=>'form-control', 'rows' => '3']) !!}
+    </div>
+    <div class="form-group">
         {!! Form::submit('Add Product', ['class'=>'btn btn-primary form-control']) !!}
     </div>
     {!! Form::close() !!}

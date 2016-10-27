@@ -33,7 +33,7 @@
         {!! Form::checkbox('featured', 'yes', true) !!}
         @else
         {!! Form::checkbox('featured', 'yes', false) !!}
-        
+
         @endif
     </div>
     <div class="form-group">
@@ -44,6 +44,10 @@
         @else
         {!! Form::checkbox('recommend', 'yes', false) !!}
         @endif
+    </div>
+    <div class="form-group">
+        {!! Form::label('tags', 'Tags (separados por vírgula):') !!}
+        {!! Form::textarea('tags', $product->tagList, ['class'=>'form-control', 'rows' => '3']) !!}
     </div>
     <div class="form-group">
         {!! Form::submit('Save Product', ['class'=>'btn btn-primary form-control']) !!}
