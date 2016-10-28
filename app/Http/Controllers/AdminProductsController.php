@@ -2,6 +2,8 @@
 
 namespace CodeCommerce\Http\Controllers;
 
+use CodeCommerce\Http\Requests\ProductRequest;
+use CodeCommerce\Tag;
 use Illuminate\Http\Request;
 use CodeCommerce\Category;
 use CodeCommerce\Http\Requests;
@@ -46,10 +48,13 @@ class AdminProductsController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\ProductRequest $request) {
+    public function store(ProductRequest $request) {
         $input = $request->all();
+        $tagsIds = $this->getTagsIds($input['tags']);
+        unset($input['tags']);
         $product = $this->productModel->fill($input);
         $product->save();
+        $product->tags()->sync($tagsIds);
         return redirect()->route('admin/products');
     }
 
@@ -72,8 +77,12 @@ class AdminProductsController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Requests\ProductRequest $request, $id) {
-        $this->productModel->find($id)->update($request->all());
+    public function update(ProductRequest $request, $id) {
+        $input = $request->all();
+        $tagsIds = $this->getTagsIds($input['tags']);
+        unset($input['tags']);
+        $this->productModel->find($id)->tags()->sync($tagsIds);
+        $this->productModel->find($id)->update($input);
         return redirect()->route('admin/products');
     }
 
@@ -115,6 +124,22 @@ class AdminProductsController extends Controller {
         $product = $image->product;
         $image->delete();
         return redirect()->route('admin/products.images', ['id' => $product->id]);
+    }
+
+    private function getTagsIDs($tagList){
+        $tags = explode(',',$tagList);
+        $tagsIDs = [];
+        foreach($tags as $tagName) {
+            $tagName = trim($tagName);
+            $tag = Tag::where('name', '=', $tagName)->first();
+            if (!$tag && !empty($tagName)) {
+                $tag = Tag::create(['name' => $tagName]);
+            }
+            if(!in_array($tag->id, $tagsIDs)) {
+                $tagsIDs[] = $tag->id;
+            }
+        }
+        return $tagsIDs;
     }
 
 }
