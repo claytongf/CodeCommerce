@@ -31,4 +31,13 @@ class Product extends Model
         $tags = $this->tags->lists('name')->toArray();
         return implode(",", $tags);
     }
+
+    //Métodos com 'scope' na frente significa para o Laravel uma consulta no banco de dados
+    public function scopeFeatured($query){
+        return $query->where('featured','=','yes');
+    }
+
+    public function scopeRecommend($query){
+        return $query->where('recommend','=','yes');
+    }
 }

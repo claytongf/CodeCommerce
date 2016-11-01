@@ -11,9 +11,9 @@
   |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'StoreController@index');
+
+Route::get('/category/{id}', ['as' => 'products_by_category', 'uses' => 'StoreController@category']);
 
 Route::group(['prefix' => 'admin', 'where' => ['id' => '[0-9]+']], function() {
     Route::group(['prefix' => 'categories'], function() {
@@ -50,12 +50,3 @@ Route::group(['prefix' => 'admin', 'where' => ['id' => '[0-9]+']], function() {
         Route::get('{id}/destroy', ['as' => 'admin/users.destroy', 'uses' => 'AdminUsersController@destroy']);
     });
 });
-//Route::get('admin/category', function () {
-//    $categories = CodeCommerce\Category::all();
-//    return view('admin/category', compact('categories'));
-//});
-//
-//Route::get('admin/product', function(){
-//    $products = CodeCommerce\Product::all();
-//    return view('admin/product', compact('products'));
-//});
