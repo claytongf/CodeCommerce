@@ -11,9 +11,9 @@
                         <div class="single-products">
                             <div class="productinfo text-center">
                                 @if(count($product->images))
-                                    <img src="" alt="" />
+                                    <img src="{{ url('uploads/'.$product->images->first()->id.'.'.$product->images->first()->extension) }}" alt="" />
                                 @else
-                                    <img src="" alt="" />
+                                    <img src="{{ url('images/no-img.jpg') }}" alt="" />
                                 @endif
                                 <h2>$ {{ $product->price }}</h2>
                                 <p>{{ $product->name }}</p>
