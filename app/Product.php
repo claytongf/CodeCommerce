@@ -40,4 +40,9 @@ class Product extends Model
     public function scopeRecommend($query){
         return $query->where('recommend','=','yes');
     }
+
+    //Métodos com 'scopeOf' na frente significa para o Laravel uma consulta no banco, podendo colocar o segundo parâmetro, como no exemplo $type
+    public function scopeOfCategory($query, $type){
+        return $query->where('category_id','=', $type);
+    }
 }
