@@ -30,10 +30,15 @@
                                 R$ {{ $item['price'] }}
                             </td>
                             <td class="cart_quantity">
-                                {{ $item['qtd'] }}
+                                {!! Form::open(['id' => 'cartForm'.$k]) !!}
+                                <div class="form-group col-xs-2">
+                                    {!! Form::text('cart_'.$k, $item['qtd'], ['class'=>' form-control', 'id'=>'cart_'.$k]) !!}
+                                </div>
+
+                                {!! Form::close() !!}
                             </td>
                             <td class="cart_total">
-                                <p class="cart_total_price">R$ {{ $item['price'] * $item['qtd'] }}</p>
+                                <p class="cart_total_price">R$ <span id="cart_price{{ $k }}">{{ $item['price'] * $item['qtd'] }}</span></p>
                             </td>
                             <td class="cart_delete">
                                 <a href="{{ route('cart.destroy', ['id'=>$k]) }}" class="cart_quantity_delete">Delete</a>
@@ -49,7 +54,7 @@
                     <tr class="cart_menu">
                         <td colspan="6">
                             <div class="pull-right">
-                                <span style="margin-right: 100px;">TOTAL: R$ {{ $cart->getTotal() }}</span>
+                                TOTAL: R$ <span style="margin-right: 100px;" id="cart_total"> {{ $cart->getTotal() }}</span>
                                 <a href="" class="btn btn-success">Fechar a conta</a>
                             </div>
                         </td>
@@ -60,4 +65,22 @@
             </div>
         </div>
     </section>
+@stop
+@section('post-script')
+    <script>
+        $(':input').on('change', function (){
+            var inputid = $(this).attr('id');
+            var qtd = $('#'+inputid).val();
+            var id = inputid.split("_");
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: "./cart/update/"+id[1]+"/"+qtd,
+                success: function(resposta){
+                    $("#cart_price"+id[1]).text(resposta.price);
+                    $("#cart_total").text(resposta.total);
+                }
+            });
+        });
+    </script>
 @stop

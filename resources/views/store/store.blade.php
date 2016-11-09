@@ -132,6 +132,7 @@
 </footer><!--/Footer-->
 
 <script src="{{ elixir('js/all.js') }}"></script>
+@yield('post-script')
 
 </body>
 </html>
