@@ -32,6 +32,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.role', 'where' => ['id'
         Route::get('{id}/destroy', ['as' => 'admin/categories.destroy', 'uses' => 'AdminCategoriesController@destroy']);
     });
 
+    Route::group(['prefix' => 'orders'], function() {
+        Route::get('', ['as' => 'admin.orders', 'uses' => 'AdminOrdersController@index']);
+        Route::put('{id}', ['as' => 'admin.orders.update', 'uses' => 'AdminOrdersController@update']);
+    });
+
+
     Route::group(['prefix' => 'products'], function() {
         Route::get('', ['as' => 'admin/products', 'uses' => 'AdminProductsController@index']);
         Route::post('', ['as' => 'admin/products.store', 'uses' => 'AdminProductsController@store']);
@@ -60,10 +66,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.role', 'where' => ['id'
 
 Route::group(['middleware'=>'auth.role'], function (){
     Route::get('checkout/placeOrder', ['as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
+    Route::get('account/orders', ['as' => 'account.orders', 'uses' => 'AccountController@orders']);
 });
+
+//Route::get('evento', function(){
+//    event(new \CodeCommerce\Events\CheckoutEvent());
+//});
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
-    'test' => 'TestController'
 ]);

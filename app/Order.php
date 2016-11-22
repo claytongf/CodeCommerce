@@ -18,4 +18,8 @@ class Order extends Model
     public function user(){
         return $this->belongsTo('CodeCommerce\User');
     }
+
+    public function status(){
+        return $this->belongsTo('CodeCommerce\OrderStatus');
+    }
 }

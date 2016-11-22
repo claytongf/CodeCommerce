@@ -15,6 +15,11 @@ $factory->define(CodeCommerce\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
+        'phone' => $faker->phoneNumber,
+        'address' => $faker->streetAddress,
+        'city' => $faker->city,
+        'state' => $faker->state,
+        'zipcode' => $faker->postcode,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
         'is_admin' => 0
@@ -36,5 +41,11 @@ $factory->define(CodeCommerce\Product::class, function (Faker\Generator $faker) 
         'category_id' => $faker->numberBetween(1, 15),
         'featured' => $faker->randomElement(array('yes', 'no')),
         'recommend' => $faker->randomElement(array('yes', 'no'))
+    ];
+});
+
+$factory->define(CodeCommerce\OrderStatus::class, function (Faker\Generator $faker){
+    return [
+        'name' => $faker->word
     ];
 });

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Description of UserTableSeeder
- *
- * @author Clayton
- */
-use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 use CodeCommerce\User;
 use Illuminate\Support\Facades\Hash;
 

@@ -37,6 +37,8 @@
                         <li><a href="{{ url('/') }}">Home</a></li>
                         <li><a href="{{ route('admin/categories') }}">Categories</a></li>
                         <li><a href="{{ route('admin/products') }}">Products</a></li>
+                        <li><a href="{{ route('admin/users') }}">Users</a></li>
+                        <li><a href="{{ route('admin.orders') }}">Orders</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
