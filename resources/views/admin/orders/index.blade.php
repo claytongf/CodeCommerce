@@ -25,7 +25,7 @@
             </td>
             <td>{{ $order->total }}</td>
             <td>
-                {!! Form::open(['route'=> ['admin.orders.update', $order->id], 'method'=>'put', 'class'=>'form-horizontal']) !!}
+                {!! Form::open(['route'=> ['admin.orders.update', $order->id], 'method'=>'put', 'class'=>'form-inline']) !!}
                 {!! Form::select('status_id', $status, $order->status->id, ['class'=> 'form-control', 'style'=>'float: left;']) !!}
                 {!! Form::submit('Update', ['class'=>'btn btn-success']) !!}
                 {!! Form::close() !!}
